@@ -19,10 +19,6 @@ namespace CandidateManagement_UI
             jobPostingService = new JobPostingService();
             LoadData();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadData();
-        }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtDescription.Text.Equals(string.Empty) || txtTitle.Text.Equals(string.Empty) || txtPostID.Text.Equals(string.Empty) || dtpPostDate.Text.Equals(string.Empty) )
@@ -142,7 +138,7 @@ namespace CandidateManagement_UI
             {
                 txtPostID.Text = selectedJobPosting.PostingId;
                 txtTitle.Text = selectedJobPosting.JobPostingTitle;
-                txtDescription.Text = selectedJobPosting.PostingId;
+                txtDescription.Text = selectedJobPosting.Description;
                 dtpPostDate.Text = selectedJobPosting.PostedDate.ToString();
             }
         }

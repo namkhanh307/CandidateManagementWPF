@@ -6,18 +6,19 @@
         xmlns:local="clr-namespace:CandidateManagement_UI"
         mc:Ignorable="d"
         Title="JobPostingWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,0,0,-6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="JOB POSTING MANAGEMENT" HorizontalAlignment="Center" Height="40" Margin="0,10,0,0" VerticalAlignment="Top" Width="346" FontWeight="Bold" FontSize="24" Grid.Column="1"/>
+        <GroupBox x:Name="grbGroupBox" HorizontalAlignment="Left" Height="139" Header="&#xA;" Margin="20,43,0,0" VerticalAlignment="Top" Width="750" Grid.ColumnSpan="2"/>
         <Label Content="Tiltle" HorizontalAlignment="Left" Height="28" Margin="21,97,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2"/>
         <Label Content="PostID" HorizontalAlignment="Left" Height="28" Margin="21,63,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2"/>
-        <Label Content="Desciption" HorizontalAlignment="Left" Height="28" Margin="359,55,0,0" VerticalAlignment="Top" Width="72" Grid.ColumnSpan="2"/>
-        <Label Content="PostDate" HorizontalAlignment="Left" Height="28" Margin="21,134,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2"/>
+        <Label Content="Description" HorizontalAlignment="Left" Height="28" Margin="359,55,0,0" VerticalAlignment="Top" Width="72" Grid.ColumnSpan="2"/>
+        <Label Content="PostDate" HorizontalAlignment="Left" Height="28" Margin="21,146,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2" RenderTransformOrigin="0.508,0.775"/>
         <TextBox x:Name="txtPostID" HorizontalAlignment="Left" Height="24" Margin="99,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"  Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Height="24" Margin="99,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"  Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Height="42" Margin="99,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"  Grid.ColumnSpan="2"/>
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="61" Margin="367,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
@@ -28,8 +29,7 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <DatePicker x:Name="dtpPostDate" HorizontalAlignment="Left" Height="26" Margin="99,134,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2"/>
-        <GroupBox x:Name="grbGroupBox" HorizontalAlignment="Left" Height="129" Header="&#xD;&#xA;" Margin="10,35,0,0" VerticalAlignment="Top" Width="750" Grid.ColumnSpan="2"/>
+        <DatePicker x:Name="dtpPostDate" HorizontalAlignment="Left" Height="26" Margin="99,146,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2" RenderTransformOrigin="0.516,1.335"/>
         <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Height="29" Margin="634,378,0,0" VerticalAlignment="Top" Width="108" Background="#FFA38CC7" Grid.ColumnSpan="2" Click="btnClose_Click_1" RenderTransformOrigin="0.861,0.657"/>
         <DataGrid x:Name="dtgJobPost" HorizontalAlignment="Left" Height="173" Margin="21,187,0,0" VerticalAlignment="Top" Width="751" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" SelectionChanged="dtgJobPost_SelectionChanged" SelectionMode="Single"/>
         <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  Height="29" Margin="444,378,0,0" VerticalAlignment="Top" Width="108" Background="#FF95ACE4" Grid.ColumnSpan="2" Click="btnDelete_Click_1"/>

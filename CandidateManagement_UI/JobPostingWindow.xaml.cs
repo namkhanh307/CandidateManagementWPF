@@ -1,6 +1,7 @@
 ﻿using CandidateManagement_BusinessObjects.Models;
 using CandidateManagement_Services;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace CandidateManagement_UI
 {
@@ -10,24 +11,86 @@ namespace CandidateManagement_UI
     public partial class JobPostingWindow : Window
     {
         private IJobPostingService jobPostingService;
+        private JobPosting selectedJobPosting = null!;
+
         public JobPostingWindow()
         {
             InitializeComponent();
             jobPostingService = new JobPostingService();
+            LoadData();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtDescription.Text.Equals(string.Empty) || txtTitle.Text.Equals(string.Empty) || txtPostID.Text.Equals(string.Empty) || dtpPostDate.Text.Equals(string.Empty) )
+            {
+                MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else if(jobPostingService.GetJobPostingById(txtPostID.Text) != null)
+            {
+                MessageBox.Show("PostID đã tồn tại!", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                JobPosting job = new()
+                {
+                    PostingId = txtPostID.Text,
+                    JobPostingTitle = txtTitle.Text,
+                    Description = txtDescription.Text,
+                    PostedDate = DateTime.Parse(dtpPostDate.Text)
+                };
+
+                if (jobPostingService.AddJobPosting(job))
+                {
+                    LoadData();
+                    ResetForm();
+                    MessageBox.Show("Thêm thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Thêm thất bại", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }     
         }
 
-        private void btnClose_Click_1(object sender, RoutedEventArgs e)
+        private void btnUpdate_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to quit?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (txtDescription.Text.Equals(string.Empty) || txtTitle.Text.Equals(string.Empty) || txtPostID.Text.Equals(string.Empty) || dtpPostDate.Text.Equals(string.Empty))
             {
-                this.Close();
+                MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else
+            {
+                JobPosting job = jobPostingService.GetJobPostingById(txtPostID.Text);
+                if (job != null)
+                {
+                    job.Description = txtDescription.Text;
+                    job.JobPostingTitle = txtTitle.Text;
+                    job.PostedDate = DateTime.Parse(dtpPostDate.Text);
+                    if (jobPostingService.UpdateJobPosting(job))
+                    {
+                        LoadData();
+                        ResetForm();
+                        MessageBox.Show("Cập nhật thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn 1 dòng", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }         
         }
 
         private void btnDelete_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Bạn có thực sự muốn xóa", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
             if (result == MessageBoxResult.Yes)
             {
                 JobPosting job = jobPostingService.GetJobPostingById(txtPostID.Text);
@@ -35,83 +98,52 @@ namespace CandidateManagement_UI
                 {
                     if (jobPostingService.DeleteJobPosting(job))
                     {
-                        this.LoadData();
-                        this.ResetForm();
-                        MessageBox.Show("Delete Successful!", "Delete", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadData();
+                        ResetForm();
+                        MessageBox.Show("Xóa thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Something wrong!", "Delete", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Xóa thất bại!", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Something wrong, please select a certain Job Posting to delete!", "Delete", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Vui lòng chọn 1 dòng", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+            }
+        }
+        private void btnClose_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Bạn có thực sự muốn thoát ", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Close();
             }
         }
         private void LoadData()
         {
-            this.dtgJobPost.ItemsSource = null;
-            this.dtgJobPost.ItemsSource = jobPostingService.GetJobPostings().Select(x => new
-            {
-                x.PostingId,
-                x.Description,
-                x.PostedDate,
-                x.JobPostingTitle,
-            });
+            dtgJobPost.ItemsSource = jobPostingService.GetJobPostings();
         }
 
         private void ResetForm()
         {
-            txtDescription.Text = string.Empty;
-            txtTitle.Text = string.Empty;
-            txtPostID.Text = string.Empty;
+            txtPostID.Clear();
+            txtTitle.Clear();
+            txtDescription.Clear();
             dtpPostDate.Text = string.Empty;
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void dtgJobPost_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            JobPosting job = new JobPosting();
-            job.PostingId = txtPostID.Text;
-            job.JobPostingTitle = txtTitle.Text;
-            job.Description = txtDescription.Text;
-            job.PostedDate = DateTime.Parse(dtpPostDate.Text);
+            selectedJobPosting = (JobPosting)dtgJobPost.SelectedItem;
 
-            if (jobPostingService.AddJobPosting(job))
+            if (selectedJobPosting != null)
             {
-                this.LoadData();
-                this.ResetForm();
-                MessageBox.Show("Add Successful!", "Add", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Something wrong!", "Add", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        private void btnUpdate_Click_1(object sender, RoutedEventArgs e)
-        {
-            JobPosting job = jobPostingService.GetJobPostingById(txtPostID.Text);
-            if (job != null)
-            {
-                job.Description = txtDescription.Text;
-                job.JobPostingTitle = txtTitle.Text;
-                job.PostedDate = DateTime.Parse(dtpPostDate.Text);
-                if (jobPostingService.UpdateJobPosting(job))
-                {
-                    this.LoadData();
-                    this.ResetForm();
-                    MessageBox.Show("Update Successful!", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Something wrong!", "Update", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Something wrong, please select a certain Job Postings to edit!", "Update", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtPostID.Text = selectedJobPosting.PostingId;
+                txtTitle.Text = selectedJobPosting.JobPostingTitle;
+                txtDescription.Text = selectedJobPosting.PostingId;
+                dtpPostDate.Text = selectedJobPosting.PostedDate.ToString();
             }
         }
     }

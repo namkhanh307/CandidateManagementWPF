@@ -18,14 +18,23 @@
         <Label Content="PostDate" HorizontalAlignment="Left" Height="28" Margin="21,134,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2"/>
         <TextBox x:Name="txtPostID" HorizontalAlignment="Left" Height="24" Margin="99,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"  Grid.ColumnSpan="2"/>
         <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Height="24" Margin="99,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"  Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="61" Margin="367,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="61" Margin="367,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0"/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
         <DatePicker x:Name="dtpPostDate" HorizontalAlignment="Left" Height="26" Margin="99,134,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2"/>
-        <GroupBox x:Name="grbGroupBox" HorizontalAlignment="Left" Height="129" Header="&#xD;&#xA;" Margin="21,38,0,0" VerticalAlignment="Top" Width="631" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Height="29" Margin="544,328,0,0" VerticalAlignment="Top" Width="108" Background="#FFA38CC7" Grid.ColumnSpan="2" Click="btnClose_Click_1"/>
-        <DataGrid x:Name="dtgJobPost" HorizontalAlignment="Left" Height="123" Margin="21,186,0,0" VerticalAlignment="Top" Width="631" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  Height="29" Margin="359,328,0,0" VerticalAlignment="Top" Width="108" Background="#FF95ACE4" Grid.ColumnSpan="2" Click="btnDelete_Click_1"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="29" Margin="189,328,0,0" VerticalAlignment="Top" Width="108" Background="#FF3DD64D" Grid.ColumnSpan="2" Click="btnUpdate_Click_1"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="29" Margin="43,328,0,0" VerticalAlignment="Top" Width="108" Background="#FFEA8282" Grid.ColumnSpan="2" Click="btnAdd_Click"/>
+        <GroupBox x:Name="grbGroupBox" HorizontalAlignment="Left" Height="129" Header="&#xD;&#xA;" Margin="10,35,0,0" VerticalAlignment="Top" Width="750" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Height="29" Margin="634,378,0,0" VerticalAlignment="Top" Width="108" Background="#FFA38CC7" Grid.ColumnSpan="2" Click="btnClose_Click_1" RenderTransformOrigin="0.861,0.657"/>
+        <DataGrid x:Name="dtgJobPost" HorizontalAlignment="Left" Height="173" Margin="21,187,0,0" VerticalAlignment="Top" Width="751" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" SelectionChanged="dtgJobPost_SelectionChanged" SelectionMode="Single"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  Height="29" Margin="444,378,0,0" VerticalAlignment="Top" Width="108" Background="#FF95ACE4" Grid.ColumnSpan="2" Click="btnDelete_Click_1"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="29" Margin="243,378,0,0" VerticalAlignment="Top" Width="108" Background="#FF3DD64D" Grid.ColumnSpan="2" Click="btnUpdate_Click_1"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="29" Margin="43,378,0,0" VerticalAlignment="Top" Width="108" Background="#FFEA8282" Grid.ColumnSpan="2" Click="btnAdd_Click"/>
 
     </Grid>
 </Window>

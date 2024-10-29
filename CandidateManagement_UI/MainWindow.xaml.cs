@@ -24,11 +24,11 @@ namespace CandidateManagement_UI
                 CandidateProfileWindow profileWindow = new CandidateProfileWindow();
                 profileWindow.Show();
                 this.Close();
-                MessageBox.Show("Hello Nam Khanh");
+                MessageBox.Show($"Xin chào {hraccount.FullName}", "Thành công");
             }
             else
-            {
-                MessageBox.Show("Bye bye");
+            { 
+                MessageBox.Show("Bạn không có quyền truy cập chức năng này!", "Thất bại!"); 
             }
         }
 

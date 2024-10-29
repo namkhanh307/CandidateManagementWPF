@@ -26,29 +26,17 @@ namespace CandidateManagement_UI
         {
             LoadData();
         }
-        private void LoadData()
-        {
-            this.dtgCandidateProfile.ItemsSource = candidateProfileService.GetCandidateProfiles();
-            cboJobPostingID.ItemsSource = jobPostingService.GetJobPostings();
-            cboJobPostingID.DisplayMemberPath = "JobPostingTitle";
-            cboJobPostingID.SelectedValuePath = "PostingId";
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
+        
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             TextRange textRange = new TextRange(txtDescription.Document.ContentStart, txtDescription.Document.ContentEnd);
-            if (txtCandidateID.Text.Equals(string.Empty) || txtFullname.Text.Equals(string.Empty) || dtpBirthday.Text.Equals(string.Empty) || textRange.Text.Equals(string.Empty) || txtProfileURL.Equals(string.Empty) || cboJobPostingID.SelectedValue.Equals(string.Empty))
+            if (txtCandidateID.Text.Equals(string.Empty) || txtFullname.Text.Equals(string.Empty) || dtpBirthday.Text.Equals(string.Empty) || textRange.Text.Equals(string.Empty) || txtProfileURL.Text.Equals(string.Empty) || cboJobPostingID.SelectedItem == null)
             {
-                MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!");
+                MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if(candidateProfileService.GetCandidateProfileById(txtCandidateID.Text) != null)
             {
-                MessageBox.Show("CandidateId đã tồn tại!");
+                MessageBox.Show("CandidateId đã tồn tại!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else 
             {
@@ -64,26 +52,28 @@ namespace CandidateManagement_UI
                 bool check = candidateProfileService.AddCandidateProfile(candidateProfile);
                 if (check)
                 {
-                    MessageBox.Show("Thêm thành công");
+                    MessageBox.Show("Thêm thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ResetForm();
                 }
                 else
                 {
-                    MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!");
+                    MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 LoadData();
             }
             
         }
+
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             TextRange textRange = new TextRange(txtDescription.Document.ContentStart, txtDescription.Document.ContentEnd);
             if (selectedCandidate == null)
             {
-                MessageBox.Show("Hãy chọn 1 dòng");
+                MessageBox.Show("Vui lòng chọn 1 dòng", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else if (txtFullname.Text.Equals(string.Empty) || dtpBirthday.Text.Equals(string.Empty) || textRange.Text.Equals(string.Empty) || txtProfileURL.Equals(string.Empty) || cboJobPostingID.SelectedValue.Equals(string.Empty))
+            else if (txtFullname.Text.Equals(string.Empty) || dtpBirthday.Text.Equals(string.Empty) || textRange.Text.Equals(string.Empty) || txtProfileURL.Text.Equals(string.Empty) || cboJobPostingID.SelectedItem == null)
             {
-                MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!");
+                MessageBox.Show("Thêm thất bại, vui lòng kiểm tra lại thông tin!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -95,11 +85,12 @@ namespace CandidateManagement_UI
                 bool check = candidateProfileService.UpdateCandidateProfile(selectedCandidate);
                 if (check)
                 {
-                    MessageBox.Show("Cập nhật thành công");
+                    MessageBox.Show("Cập nhật thành công", "Thành công!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ResetForm();
                 }
                 else
                 {
-                    MessageBox.Show("Cập nhật thất bại, vui lòng kiểm tra lại thông tin!!");
+                    MessageBox.Show("Cập nhật thất bại, vui lòng kiểm tra lại thông tin!!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             LoadData();
@@ -110,7 +101,7 @@ namespace CandidateManagement_UI
             if (selectedCandidate != null)
             {
                 // Display a confirmation dialog
-                MessageBoxResult result = MessageBox.Show("Bạn có thực sự muốn xóa", "Xác nhận", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show("Bạn có thực sự muốn xóa", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 // If the user confirms, proceed with the deletion
                 if (result == MessageBoxResult.Yes)
@@ -119,12 +110,12 @@ namespace CandidateManagement_UI
                     bool check = candidateProfileService.DeleteCandidateProfile(selectedCandidate);
                     if (check)
                     {
-                        MessageBox.Show("Xóa thành công");
                         LoadData();
+                        MessageBox.Show("Xóa thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Xóa thất bại, vui lòng kiểm tra lại thông tin!!");
+                        MessageBox.Show("Xóa thất bại, vui lòng kiểm tra lại thông tin!!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
@@ -135,7 +126,15 @@ namespace CandidateManagement_UI
             else
             {
                 // If no candidate is selected, notify the user
-                MessageBox.Show("Chọn 1 dòng");
+                MessageBox.Show("Vui lòng chọn 1 dòng", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Bạn có thực sự muốn thoát?", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Close();
             }
         }
 
@@ -154,5 +153,23 @@ namespace CandidateManagement_UI
                 cboJobPostingID.SelectedValue = selectedCandidate.PostingId;
             }
         }
+        private void LoadData()
+        {
+            this.dtgCandidateProfile.ItemsSource = candidateProfileService.GetCandidateProfiles();
+            cboJobPostingID.ItemsSource = jobPostingService.GetJobPostings();
+            cboJobPostingID.DisplayMemberPath = "JobPostingTitle";
+            cboJobPostingID.SelectedValuePath = "PostingId";
+        }
+
+        private void ResetForm()
+        {
+            txtCandidateID.Clear();
+            txtFullname.Clear();
+            txtDescription.Document.Blocks.Clear();
+            dtpBirthday.Text = string.Empty;
+            txtProfileURL.Clear();
+            cboJobPostingID.SelectedItem = null;
+        }
+
     }
 }

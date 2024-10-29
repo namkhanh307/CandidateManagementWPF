@@ -1,0 +1,23 @@
+﻿<Window x:Class="CandidateManagement_UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CandidateManagement_UI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Email" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="36" Margin="231,158,0,0" VerticalAlignment="Top" Width="71" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Password" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="38" Margin="231,225,0,0" VerticalAlignment="Top" Width="108" FontWeight="Bold" FontSize="16"/>
+        <TextBox x:Name="txtEmail" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="37" Margin="329,158,0,0" TextWrapping="Wrap" Text="admin@hr.com.vn" VerticalAlignment="Top" Width="182" FontSize="16"/>
+        <TextBox x:Name="txtPassword" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="38" Margin="329,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183" FontSize="16"/>
+        <Button x:Name="btnLogin" Content="Login" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="47" Margin="277,290,0,0" VerticalAlignment="Top" Width="102" FontSize="14" Click="btnLogin_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="47" Margin="433,290,0,0" VerticalAlignment="Top" Width="105" FontSize="14" Click="btnCancel_Click"/>
+        <Label Content="Login Screen" HorizontalAlignment="Center" Height="55" Margin="0,51,0,0" VerticalAlignment="Top" Width="144" FontSize="22" FontWeight="Bold" Grid.Column="1"/>
+
+    </Grid>
+</Window>

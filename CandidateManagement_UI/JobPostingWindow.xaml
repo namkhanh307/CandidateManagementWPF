@@ -5,21 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CandidateManagement_UI"
         mc:Ignorable="d"
-        Title="JobPostingWindow" Height="450" Width="800">
+        Title="JobPostingWindow" Height="450" Width="971">
     <Grid Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Content="JOB POSTING MANAGEMENT" HorizontalAlignment="Center" Height="40" Margin="0,10,0,0" VerticalAlignment="Top" Width="346" FontWeight="Bold" FontSize="24" Grid.Column="1"/>
-        <GroupBox x:Name="grbGroupBox" HorizontalAlignment="Left" Height="139" Header="&#xA;" Margin="20,43,0,0" VerticalAlignment="Top" Width="750" Grid.ColumnSpan="2"/>
-        <Label Content="Tiltle" HorizontalAlignment="Left" Height="28" Margin="21,97,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2"/>
-        <Label Content="PostID" HorizontalAlignment="Left" Height="28" Margin="21,63,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2"/>
-        <Label Content="Description" HorizontalAlignment="Left" Height="28" Margin="359,55,0,0" VerticalAlignment="Top" Width="72" Grid.ColumnSpan="2"/>
-        <Label Content="PostDate" HorizontalAlignment="Left" Height="28" Margin="21,146,0,0" VerticalAlignment="Top" Width="65" Grid.ColumnSpan="2" RenderTransformOrigin="0.508,0.775"/>
-        <TextBox x:Name="txtPostID" HorizontalAlignment="Left" Height="24" Margin="99,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"  Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Height="42" Margin="99,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"  Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="61" Margin="367,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+        <Label Content="JOB POSTING MANAGEMENT" HorizontalAlignment="Left" Height="40" Margin="479,6,0,0" VerticalAlignment="Top" Width="346" FontWeight="Bold" FontSize="24" Grid.Column="1"/>
+        <GroupBox x:Name="grbGroupBox" HorizontalAlignment="Left" Height="140" Header="&#xA;" Margin="186,38,0,0" VerticalAlignment="Top" Width="750" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Label Content="Tiltle" HorizontalAlignment="Left" Height="28" Margin="188,93,0,0" VerticalAlignment="Top" Width="64" Grid.ColumnSpan="2"/>
+        <Label Content="PostID" HorizontalAlignment="Left" Height="28" Margin="188,59,0,0" VerticalAlignment="Top" Width="64" Grid.ColumnSpan="2"/>
+        <Label Content="Description" HorizontalAlignment="Left" Height="28" Margin="526,51,0,0" VerticalAlignment="Top" Width="72" Grid.ColumnSpan="2"/>
+        <Label Content="PostDate" HorizontalAlignment="Left" Height="28" Margin="188,1,0,0" VerticalAlignment="Top" Width="64" Grid.ColumnSpan="2" RenderTransformOrigin="0.508,0.775" Grid.Row="1"/>
+        <TextBox x:Name="txtPostID" HorizontalAlignment="Left" Height="24" Margin="266,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"  Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Height="42" Margin="266,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"  Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="61" Margin="534,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -29,12 +33,14 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <DatePicker x:Name="dtpPostDate" HorizontalAlignment="Left" Height="26" Margin="99,146,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2" RenderTransformOrigin="0.516,1.335"/>
-        <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Height="29" Margin="634,378,0,0" VerticalAlignment="Top" Width="108" Background="#FFA38CC7" Grid.ColumnSpan="2" Click="btnClose_Click_1" RenderTransformOrigin="0.861,0.657"/>
-        <DataGrid x:Name="dtgJobPost" HorizontalAlignment="Left" Height="173" Margin="21,187,0,0" VerticalAlignment="Top" Width="751" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" SelectionChanged="dtgJobPost_SelectionChanged" SelectionMode="Single"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  Height="29" Margin="444,378,0,0" VerticalAlignment="Top" Width="108" Background="#FF95ACE4" Grid.ColumnSpan="2" Click="btnDelete_Click_1"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="29" Margin="243,378,0,0" VerticalAlignment="Top" Width="108" Background="#FF3DD64D" Grid.ColumnSpan="2" Click="btnUpdate_Click_1"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="29" Margin="43,378,0,0" VerticalAlignment="Top" Width="108" Background="#FFEA8282" Grid.ColumnSpan="2" Click="btnAdd_Click"/>
+        <DatePicker x:Name="dtpPostDate" HorizontalAlignment="Left" Height="26" Margin="266,1,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2" RenderTransformOrigin="0.516,1.335" Grid.Row="1"/>
+        <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Height="28" Margin="800,233,0,0" VerticalAlignment="Top" Width="108" Background="#FFA38CC7" Grid.ColumnSpan="2" Click="btnClose_Click_1" RenderTransformOrigin="0.861,0.657" Grid.Row="1"/>
+        <DataGrid x:Name="dtgJobPost" HorizontalAlignment="Left" Height="173" Margin="188,42,0,0" VerticalAlignment="Top" Width="750" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" SelectionChanged="dtgJobPost_SelectionChanged" SelectionMode="Single" Grid.Row="1"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  Height="28" Margin="610,233,0,0" VerticalAlignment="Top" Width="108" Background="#FF95ACE4" Grid.ColumnSpan="2" Click="btnDelete_Click_1" Grid.Row="1"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="28" Margin="410,233,0,0" VerticalAlignment="Top" Width="108" Background="#FF3DD64D" Grid.ColumnSpan="2" Click="btnUpdate_Click_1" Grid.Row="1"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="28" Margin="210,233,0,0" VerticalAlignment="Top" Width="108" Background="#FFEA8282" Grid.ColumnSpan="2" Click="btnAdd_Click" Grid.Row="1"/>
+        <Button x:Name="btnLogOut" Grid.Column="1" Content="Log out" HorizontalAlignment="Left" Height="38" Margin="36,13,0,0" VerticalAlignment="Top" Width="118" Background="#FFED9D9D" Click="btnLogOut_Click" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
+        <Button x:Name="btnManageCP" Content="Manage Candidate Profile" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="42" Margin="22,95,0,0" VerticalAlignment="Top" Width="146" Background="#FF8BC2EC" Click="btnManageCP_Click"/>
 
     </Grid>
 </Window>

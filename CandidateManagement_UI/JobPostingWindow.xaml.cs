@@ -142,5 +142,23 @@ namespace CandidateManagement_UI
                 dtpPostDate.Text = selectedJobPosting.PostedDate.ToString();
             }
         }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Bạn có thực sự muốn đăng xuất?", "Đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                MainWindow mainWindow = new MainWindow();
+                Close();
+                mainWindow.Show();
+            }
+        }
+
+        private void btnManageCP_Click(object sender, RoutedEventArgs e)
+        {
+            CandidateProfileWindow candidateProfileWindow = new CandidateProfileWindow();
+            candidateProfileWindow.Show();
+            Close();
+        }
     }
 }

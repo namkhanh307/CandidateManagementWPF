@@ -171,5 +171,22 @@ namespace CandidateManagement_UI
             cboJobPostingID.SelectedItem = null;
         }
 
+        private void btnManageJP_Click(object sender, RoutedEventArgs e)
+        {
+            JobPostingWindow jobPostingWindow = new JobPostingWindow();
+            Close();
+            jobPostingWindow.Show();
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Bạn có thực sự muốn đăng xuất?", "Đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                MainWindow mainWindow = new MainWindow();
+                Close();
+                mainWindow.Show();
+            }
+        }
     }
 }

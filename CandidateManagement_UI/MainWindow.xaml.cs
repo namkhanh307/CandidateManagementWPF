@@ -23,7 +23,7 @@ namespace CandidateManagement_UI
             {
                 CandidateProfileWindow profileWindow = new CandidateProfileWindow();
                 profileWindow.Show();
-                this.Close();
+                Close();
                 MessageBox.Show($"Xin chào {hraccount.FullName}", "Thành công");
             }
             else

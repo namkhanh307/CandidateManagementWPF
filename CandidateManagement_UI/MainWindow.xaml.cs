@@ -28,7 +28,7 @@ namespace CandidateManagement_UI
             }
             else
             { 
-                MessageBox.Show("Bạn không có quyền truy cập chức năng này!", "Thất bại!"); 
+                MessageBox.Show("Bạn không có quyền truy cập chức năng này!", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
